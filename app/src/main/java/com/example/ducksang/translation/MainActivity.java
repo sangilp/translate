@@ -41,14 +41,14 @@ public class MainActivity extends AppCompatActivity {
         transButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // 번역 할 단어가 입력되었는지 확인
+                // 번역 할 내용이 입력되었는지 확인
                 if(bfText.getText().toString().length()==0){
-                    Toast.makeText(MainActivity.this, "번역할 단어를 입력하세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "번역할 내용을 입력하세요.", Toast.LENGTH_SHORT).show();
                     bfText.requestFocus();
                     return;
                 }
 
-                // 번역 할 단어가 입력 되었다면 Naver Open API 연동
+                // 번역 할 내용이 입력 되었다면 Naver Open API 연동
                 NaverTranslateTask nTrans = new NaverTranslateTask();
                 String sText = bfText.getText().toString();
                 nTrans.execute(sText);
@@ -110,6 +110,31 @@ public class MainActivity extends AppCompatActivity {
 
             } catch (Exception e) {
                 return null;
+            }
+        }
+        // 번역된 결과를 받아서 처리
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            // Naver Open Api는 출력 포맷이 Json 이기때문에 자바객체로 변환하기 위해 Gson 사용
+            Gson gson = new GsonBuilder().create();
+            JsonParser parser = new JsonParser();
+            JsonElement rootObj = parser.parse(s.toString())
+                    // 원하는 데이터를 찾기
+                    .getAsJsonObject().get("message")
+                    .getAsJsonObject().get("result");
+            Item items = gson.fromJson(rootObj.toString(), Item.class);
+
+            // 번역결과를 텍스트뷰에 넣기
+            afText.setText(items.getTranslatedText());
+        }
+
+        // 자바 객체로 변환한 값을 담을 클래스
+        private class Item {
+            String translatedText;
+
+            public String getTranslatedText() {
+                return translatedText;
             }
         }
     }
