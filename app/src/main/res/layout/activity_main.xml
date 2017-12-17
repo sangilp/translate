@@ -48,10 +48,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="18dp"
+        android:layout_marginBottom="14dp"
         android:background="@android:color/transparent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:srcCompat="@drawable/id"
-        android:layout_marginBottom="14dp"
         app:layout_constraintBottom_toTopOf="@+id/before_text" />
 
     <ImageButton
@@ -59,10 +59,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="18dp"
+        android:layout_marginBottom="14dp"
         android:background="@android:color/transparent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:srcCompat="@drawable/id"
-        android:layout_marginBottom="14dp"
         app:layout_constraintBottom_toTopOf="@+id/after_text" />
 
     <TextView
@@ -70,16 +70,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
+        android:layout_marginBottom="22dp"
         android:text="TextView"
         app:layout_constraintLeft_toRightOf="@+id/sourceButton"
-        android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toTopOf="@+id/before_text" />
 
     <TextView
         android:id="@+id/langTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="22dp"
         android:layout_marginLeft="40dp"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/after_text"
